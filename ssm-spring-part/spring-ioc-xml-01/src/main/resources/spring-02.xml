@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="userDao" class="com.atguigu.ioc_02.UserDao" />
+<!--    <bean id="userService" class="com.atguigu.ioc_02.UserService" >-->
+<!--        构造参数传值 DI的配置
+        <constructor-arg 构造参数传值的DI配置
+                value = 直接属性值  Spring name = "二狗子"  int  age = 18
+                ref = 引用其他的bean   beanId值
+        <constructor-arg ref="userDao" />
+    </bean>-->
+
+    <bean id="userService1" class="com.atguigu.ioc_02.UserService">
+        <!-- 方案1:按构造参数的顺序填写值 ,value直接赋值，ref引用其他的beanId（不推荐，因为要考虑顺序）-->
+        <constructor-arg value="18"/> <!-- 不考虑类型，全部按字符串处理 -->
+        <constructor-arg value="二狗子"/>
+        <constructor-arg ref="userDao"/>
+    </bean>
+
+    <bean id="userService2" class="com.atguigu.ioc_02.UserService">
+        <!-- 方案2:按构造参数的名称填写，不用考虑顺序（推荐）-->
+        <constructor-arg name="name" value="二狗子"/>
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="userDao" ref="userDao"/>
+    </bean>
+
+    <bean id="userService2" class="com.atguigu.ioc_02.UserService">
+        <!-- 方案3:按构造参数的下角标指定填写，不用考虑顺序，用index = 构造参数的下角标，从0开始（了解即可）
+        目前 age = 0  name = 1 userDao = 2-->
+        <constructor-arg index="1" value="二狗子"/>
+        <constructor-arg index="0" value="18"/>
+        <constructor-arg index="2" ref="userDao"/>
+    </bean>
+
+    <bean id="movieFinder" class="com.atguigu.ioc_02.MovieFinder" />
+    <bean id="simpleMovieLister" class="com.atguigu.ioc_02.SimpleMovieLister" >
+        <!--
+         property中的name 是 setter方法的  去掉set和首字母小写的值！
+         是调用set方法的名，例如setMovieFinder,那么此时name就是movieFinder,它的这个name可能跟bean的id刚好一样，但是仅仅是巧合
+         value | ref  二选一，value = "直接赋值"  ref = "其他beanId"
+         -->
+        <property name="movieName" value="消失的她" />
+        <property name="movieFinder" ref="movieFinder" />
+    </bean>
+
+</beans>
