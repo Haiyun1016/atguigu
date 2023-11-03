@@ -29,7 +29,7 @@ import java.lang.reflect.Modifier;
 @Component
 @Aspect
 public class MyAdvice {
-    @Before("execution(* com..impl.*.*(..))")
+    @Before("com.atguigu.pointcut.MyPointCut.mypc()")
     public void before(JoinPoint joinPoint) {
         // 1. 获取方法属于的类的信息
         String simpleName = joinPoint.getTarget().getClass().getSimpleName();
@@ -41,12 +41,12 @@ public class MyAdvice {
         Object[] args = joinPoint.getArgs();
     }
 
-    @AfterReturning(value = "execution(* com..impl.*.*(..))", returning = "result")
+    @AfterReturning(value = "com.atguigu.pointcut.MyPointCut.mypc()", returning = "result")
     public void afterReturning(JoinPoint joinPoint, Object result) {}
 
-    @After("execution(* com..impl.*.*(..))")
+    @After("com.atguigu.pointcut.MyPointCut.mypc()")
     public void after(JoinPoint joinPoint) {}
 
-    @AfterThrowing(value = "execution(* com..impl.*.*(..))", throwing = "throwable")
+    @AfterThrowing(value = "com.atguigu.pointcut.MyPointCut.mypc()", throwing = "throwable")
     public void afterThrowing(JoinPoint joinPoint, Throwable throwable) {}
 }
