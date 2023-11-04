@@ -26,8 +26,8 @@ import java.lang.reflect.Modifier;
  *          2. 需要在注解中指定形参名 (, throwing = "形参名"「throwable」”)
  */
 
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class MyAdvice {
     @Before("com.atguigu.pointcut.MyPointCut.mypc()")
     public void before(JoinPoint joinPoint) {

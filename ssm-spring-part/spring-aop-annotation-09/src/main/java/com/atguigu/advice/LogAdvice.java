@@ -3,6 +3,7 @@ package com.atguigu.advice;
 //增强类，内容要存储增强代码
 
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.test.context.event.annotation.PrepareTestInstance;
 
@@ -37,6 +38,7 @@ import org.springframework.test.context.event.annotation.PrepareTestInstance;
  */
 @Component
 @Aspect
+@Order(20)
 public class LogAdvice {
     /**
      * TODO: 切点表达式
